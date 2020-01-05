@@ -8,6 +8,7 @@ section .data
 garbage: db "Nothing to see here.", 0h
 
 section .text
+global nothing:function (nothing.end - nothing)
 global _start
 _start:
 subroutineWrite:
@@ -16,6 +17,7 @@ subroutineWrite:
   mov rsi, msg      ;	second param
   mov rdx, msglen   ;   third param
   syscall           ;
+  call nothing
   jmp subroutineExit
 .localNop:
   nop
@@ -27,3 +29,9 @@ subroutineExit:
   mov rdi, 0        ;   exit(0)
   syscall           ;
 
+nothing:
+  nop
+  nop
+  nop
+  ret
+nothing.end:
